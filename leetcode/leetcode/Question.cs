@@ -9,6 +9,120 @@ namespace leetcode
     class Question
     {
         /// <summary>
+        /// 387. First Unique Character in a String
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int FirstUniqChar(string s)
+        {
+            if (s.Length == 0)
+            {
+                return -1;
+            }
+            if (s.Length == 1)
+            {
+                return 0;
+            }
+            Dictionary<char, int> fuc = new Dictionary<char, int>();
+            for (int i = 0; i< s.Length; i++)
+            {
+                if (!fuc.Keys.Contains(s[i]))
+                {
+                    fuc.Add(s[i], i);
+                }
+                else
+                {
+                    char index = s[i];
+                    fuc[index] = -1;
+                }
+            }
+            if (!fuc.Values.Contains(-1))
+            {
+                return 0;
+            }
+            if (fuc.Values.Count() == -fuc.Values.Sum() )
+            {
+                return -1;
+            }
+            int min = -2;
+            foreach (int index in fuc.Values)
+            {
+                if (index  == -1)
+                {
+                    continue;
+                }
+                if (min == -2)
+                {
+                    min = index;
+                    continue;
+                }
+                if (index < min)
+                {
+                    min = index;
+                }
+            }
+            return min;
+        }
+
+        /// <summary>
+        /// 443. String Compression
+        /// </summary>
+        /// <param name="chars"></param>
+        /// <returns></returns>
+        public int Compress(char[] chars)
+        {
+            if (chars.Length <= 1)
+            {
+                return chars.Length;
+            }
+            List<char> result = new List<char>();
+            int start = 0;
+            int end = 0;
+            for (int i = 1; i<chars.Length; i++)
+            {
+                if (chars[i] == chars[start])
+                {
+                    end = i;
+                    if (i==chars.Length-1)
+                    {
+                        if (end == start)
+                        {
+                            result.Add(chars[start]);
+                        }
+                        if (end > start)
+                        {
+                            result.Add(chars[start]);
+                            string temp = (end - start + 1).ToString();
+                            for (int j = 0; j < temp.Length; j++)
+                            {
+                                result.Add(temp[j]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (end == start)
+                    {
+                        result.Add(chars[start]);
+                    }
+                    if (end > start)
+                    {
+                        result.Add(chars[start]);
+                        string temp = (end - start + 1).ToString();
+                        for (int j = 0; j<temp.Length; j++)
+                        {
+                            result.Add(temp[j]);
+                        }
+                    }
+                    start = i;
+                    end = start;
+                }
+            }
+            return result.Count;
+        }
+
+        /// <summary>
         /// 819. Most Common Word
         /// "Bob hit a ball, the hit BALL flew far after it was hit.";
         /// </summary>
