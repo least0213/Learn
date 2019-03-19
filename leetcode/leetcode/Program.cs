@@ -11,6 +11,9 @@ namespace leetcode
         static void Main(string[] args)
         {
             Testcase myT = new Testcase();
+            myT.tc70();
+
+            //myT.tc121();
 
             //Pass
             //myT.tc268();
@@ -22,10 +25,15 @@ namespace leetcode
             //myT.tc443();
 
             //Pass
-            myT.tc448();
+            //myT.tc448();
 
             //Pass
             //myT.tc819();
+
+            //myT.tc867();
+            //myT.tc905();
+            //myT.tc977();
+
             Console.Read();
         }
     }

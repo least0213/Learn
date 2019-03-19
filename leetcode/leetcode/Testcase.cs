@@ -10,6 +10,29 @@ namespace leetcode
     {
 
         /// <summary>
+        /// 70. Climbing Stairs
+        /// </summary>
+        public void tc70()
+        {
+            int input = 10;
+            Problem test = new Problem();
+            int result = test.ClimbStairs(input);
+            Console.Write(result);
+        }
+
+        /// <summary>
+        /// 121. Best Time to Buy and Sell Stock
+        /// </summary>
+        public void tc121()
+        {
+            int[] input = { 7, 1, 5, 3, 6, 4 };
+            Problem test = new Problem();
+            //int result = test.MaxProfit(input);
+            int result = test.MaxProfitOpt(input);
+            Console.Write(result);
+        }
+
+        /// <summary>
         /// 268. Missing Number
         /// </summary>
         public void tc268()
@@ -92,6 +115,70 @@ namespace leetcode
             Console.WriteLine(paragraph);
             string[] banned = {"hit"};
             Console.WriteLine(myQ.MostCommonWord(paragraph, banned));
+        }
+
+        /// <summary>
+        /// 867. Transpose Matrix
+        /// </summary>
+        public void tc867()
+        {
+            int[][] input = new int[3][];
+            input[0] = new int[3] { 1, 2, 3 };
+            input[1] = new int[3] { 4, 5, 6 };
+            input[2] = new int[3] { 7, 8, 9 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                for (int j = 0; j < input[0].Length; j++)
+                {
+                    Console.Write(input[i][j] + " ");
+                }
+                Console.Write("\n");
+            }
+            Problem test = new Problem();
+            int[][] result = test.Transpose(input);
+            for (int i = 0; i < result.Length; i++)
+            {
+                for (int j = 0; j < result[0].Length; j++)
+                {
+                    Console.Write(result[i][j] + " ");
+                }
+                Console.Write("\n");
+            }
+        }
+
+        /// <summary>
+        /// 905. Sort Array By Parity
+        /// </summary>
+        public void tc905()
+        {
+            int[] input = { 3, 1, 2, 4, 7, 8 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Problem test = new Problem();
+            int[] output = test.SortArrayByParity(input);
+            Console.WriteLine();
+            for (int j = 0; j < input.Length; j++)
+            {
+                Console.Write(output[j] + " ");
+            }
+        }
+
+        public void tc977()
+        {
+            int[] input = { -4, -1, 0, 3, 10 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Problem test = new Problem();
+            int[] output = test.SortedSquares(input);
+            Console.WriteLine();
+            for (int j = 0; j < input.Length; j++)
+            {
+                Console.Write(output[j] + " ");
+            }
         }
     }
 }
