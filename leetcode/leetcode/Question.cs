@@ -6,8 +6,41 @@ using System.Threading.Tasks;
 
 namespace leetcode
 {
-    class Question
+    public class Question
     {
+        /// <summary>
+        /// 66. Plus One
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public int[] PlusOne(int[] digits)
+        {
+            int a = 1;
+            List<int> temp = new List<int>();
+
+            for (int i = digits.Length - 1; i>=0; i--)
+            {
+                int current = (digits[i] + a) % 10;
+                a = (digits[i] + a) / 10;
+                temp.Add(current);
+            }
+
+            if (a != 0)
+            {
+                temp.Add(a);
+            }
+
+            int length = temp.Count;
+            int[] result = new int[length];
+
+            for (int j = 0; j<length; j++)
+            {
+                result[j] = temp[length-1-j];
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// 70. Climbing Stairs
         /// </summary>
@@ -110,6 +143,42 @@ namespace leetcode
             int sum_full = n * (n + 1) / 2;
             int result = sum_full - sum_nums;
             return result;
+        }
+
+        /// <summary>
+        /// 345. Reverse Vowels of a String
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string ReverseVowels(string s)
+        {
+            if (s.Length < 2)
+            {
+                return s;
+            }
+
+            StringBuilder result = new StringBuilder(s);
+            int startIndex = 0;
+            int endIndex = s.Length - 1;
+            string vowels = "aeiouAEIOU";
+
+            while (startIndex < s.Length && endIndex >= 0)
+            {
+                if (!vowels.Contains(s[endIndex]))
+                {
+                    endIndex--;
+                    continue;
+                }
+                if (!vowels.Contains(s[startIndex]))
+                {
+                    startIndex++;
+                    continue;
+                }
+                result[startIndex] = s[endIndex];
+                startIndex++;
+                endIndex--;
+            }
+            return result.ToString();
         }
 
         /// <summary>
@@ -396,6 +465,81 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 917. Reverse Only Letters
+        /// a-bC-dEf-ghIj
+        /// </summary>
+        /// <param name="S"></param>
+        /// <returns></returns>
+        public string ReverseOnlyLetters(string S)
+        {
+            if (S.Length < 2)
+            {
+                return S;
+            }
+
+            StringBuilder result = new StringBuilder();
+            char[] input = S.ToCharArray();
+
+            int index = S.Length-1;
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                if (Char.IsLetter(input[i]))
+                {
+                    while (index >= 0)
+                    {
+                        if (Char.IsLetter(input[index]))
+                        {
+                            result.Append(input[index]);
+                            index--;
+                            break;
+                        }
+                        else
+                        {
+                            index--;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    result.Append(input[i]);
+                }
+            }
+            return result.ToString();
+        }
+
+        public string ReverseOnlyLettersOpt(string S)
+        {
+            if (S.Length < 2)
+            {
+                return S;
+            }
+
+            StringBuilder result = new StringBuilder(S);
+            int startIndex = 0;
+            int endIndex = S.Length - 1;
+
+            while (startIndex < S.Length && endIndex >=0)
+            {
+                if (!Char.IsLetter(Convert.ToChar(S[endIndex])))
+                {
+                    endIndex--;
+                    continue;
+                }
+                if (!Char.IsLetter(Convert.ToChar(S[startIndex])))
+                {
+                    startIndex++;
+                    continue;
+                }
+                result[startIndex] = S[endIndex];
+                startIndex++;
+                endIndex--;
+            }
+            return result.ToString();
+        }
+
+        /// <summary>
         /// 977. Squares of a Sorted Array
         /// </summary>
         /// <param name="A"></param>
@@ -433,4 +577,42 @@ namespace leetcode
         }
 
     }
+
+    /// <summary>
+    /// 303. Range Sum Query - Immutable
+    /// </summary>
+    public class NumArray
+    {
+        private int[] sum;
+
+        public NumArray(int[] nums)
+        {
+            sum = new int[nums.Length];
+            for (int i = 0; i<nums.Length; i++)
+            {
+                if (i == 0)
+                {
+                    sum[i] = nums[i];
+                }
+                else
+                {
+                    sum[i] = sum[i - 1] + nums[i];
+                }
+            }
+
+        }
+
+        public int SumRange(int i, int j)
+        {
+            if (i == 0)
+            {
+                return sum[j];
+            }
+            else
+            {
+                return sum[j] - sum[i - 1];
+            }
+        }
+    }
+
 }
