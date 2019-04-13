@@ -10,10 +10,11 @@ namespace leetcode
     {
         static void Main(string[] args)
         {
+
             //Testcase myT = new Testcase();
 
             //myT.tc66();
-            
+
             //myT.tc70();
 
             //myT.tc121();

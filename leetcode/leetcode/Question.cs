@@ -9,6 +9,117 @@ namespace leetcode
     public class Question
     {
         /// <summary>
+        /// 20. Valid Parentheses
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool IsValid(string s)
+        {
+            if (s.Length % 2 != 0)
+            {
+                return false;
+            }
+
+            Stack<char> parentheses = new Stack<char>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (parentheses.Count == 0)
+                {
+                    parentheses.Push(s[i]);
+                }
+                else
+                {
+                    if (IsMatch(parentheses.Peek(), s[i]))
+                    {
+                        parentheses.Pop();
+                    }
+                    else
+                    {
+                        parentheses.Push(s[i]);
+                    }
+                }
+            }
+
+            if (parentheses.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool IsMatch(char a, char b)
+        {
+            switch (a)
+            {
+                case '(':
+                    if (b == ')')
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case '{':
+                    if (b == '}')
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case '[':
+                    if (b == ']')
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// 53. Maximum Subarray
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaxSubArray(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums[0];
+            }
+
+            int sum = 0;
+            int max = nums[0];
+            for (int i = 0; i<nums.Length; i++)
+            {
+                if (sum > 0)
+                {
+                    sum += nums[i];
+                }
+                else
+                {
+                    sum = nums[i];
+                }
+                if(sum > max)
+                {
+                    max = sum;
+                }
+            }
+            return max;
+        }
+
+        /// <summary>
         /// 66. Plus One
         /// </summary>
         /// <param name="digits"></param>
@@ -18,7 +129,7 @@ namespace leetcode
             int a = 1;
             List<int> temp = new List<int>();
 
-            for (int i = digits.Length - 1; i>=0; i--)
+            for (int i = digits.Length - 1; i >= 0; i--)
             {
                 int current = (digits[i] + a) % 10;
                 a = (digits[i] + a) / 10;
@@ -33,9 +144,9 @@ namespace leetcode
             int length = temp.Count;
             int[] result = new int[length];
 
-            for (int j = 0; j<length; j++)
+            for (int j = 0; j < length; j++)
             {
-                result[j] = temp[length-1-j];
+                result[j] = temp[length - 1 - j];
             }
 
             return result;
@@ -125,6 +236,121 @@ namespace leetcode
             }
 
             return maxValue;
+        }
+
+        /// <summary>
+        /// 125. Valid Palindrome
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool IsPalindrome(string s)
+        {
+            if (s.Length < 2)
+            {
+                return true;
+            }
+
+            StringBuilder temp = new StringBuilder();
+            for (int i = 0; i <= s.Length - 1; i++)
+            {
+                if (Char.IsLetter(s[i]))
+                {
+                    temp.Append(Char.ToLower(s[i]));
+                }
+                if (Char.IsDigit(s[i]))
+                {
+                    temp.Append(s[i]);
+                }
+            }
+
+            string letter = temp.ToString();
+
+            int start = 0;
+            int end = letter.Length - 1;
+            while (start < letter.Length/2)
+            {
+                if (letter[start] == letter[end])
+                {
+                    start++;
+                    end--;
+                    continue;
+                }
+                else
+                {
+                    return false;
+                }               
+            }
+
+            return true;
+        }
+
+        public bool IsPalindromeOpt(string s)
+        {
+            if (s.Length < 2)
+            {
+                return true;
+            }
+            
+            int start = 0;
+            int end = s.Length - 1;
+            while (start < end)
+            {
+                if (Char.IsLetterOrDigit(s[start]))
+                {
+                    if (Char.IsLetterOrDigit(s[end]))
+                    {
+                        if (Char.ToLower(s[start]) == Char.ToLower(s[end]))
+                        {
+                            start++;
+                            end--;
+                            continue;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        end--;
+                    }
+                }
+                else
+                {
+                    start++;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 238. Product of Array Except Self
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int[] ProductExceptSelf(int[] nums)
+        {
+            if (nums.Length <= 1)
+            {
+                return nums;
+            }
+
+            int[] result = new int[nums.Length];
+            result[0] = 1;
+            int left = 1;
+            int right = 1;
+            for (int i = 1; i<nums.Length;i++)
+            {
+                left *= nums[i-1];
+                result[i] = left;
+            }
+            for (int j = nums.Length - 2; j >= 0; j--)
+            {
+                right *= nums[j+1];
+                result[j] *= right;  
+            }
+            return result;
         }
 
         /// <summary>
@@ -328,6 +554,183 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 509. Fibonacci Number
+        /// </summary>
+        /// <param name="N"></param>
+        /// <returns></returns>
+        public int Fib(int N)
+        {
+            if (N == 0)
+            {
+                return 0;
+            }
+            if (N == 1)
+            {
+                return 1;
+            }
+
+            int f0 = 0;
+            int f1 = 1;
+            int f2 = 0;
+            int i = 2;
+            while (i++ <= N)
+            {
+                f2 = f0 + f1;
+                f0 = f1;
+                f1 = f2;
+            }
+
+            return f2;
+        }
+
+        /// <summary>
+        /// 643. Maximum Average Subarray I
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public double FindMaxAverage(int[] nums, int k)
+        {
+            double sum = 0;
+            double max = 0;
+            for (int i = 0; i < k; i++)
+            {
+                sum += nums[i];
+            }
+            max = sum;
+
+            int start = 0;
+            int end = k;
+            for (; end < nums.Length; end++)
+            {
+                sum -= nums[start];
+                sum += nums[end];
+                start++;
+                if (sum > max)
+                {
+                    max = sum;
+                }
+            }
+
+            return max / k;
+        }
+
+        /// <summary>
+        /// 665. Non-decreasing Array
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public bool CheckPossibility(int[] nums)
+        {
+            if (nums.Length < 2)
+            {
+                return true;
+            }
+
+            int count = 0;
+
+            for (int i = 0; i < nums.Length-1; i++)
+            {
+                if (nums[i] > nums[i + 1])
+                {
+                    if (count > 1)
+                    {
+                        return false;
+                    }
+                    if (i - 1 < 0 || nums[i - 1] < nums[i + 1])
+                    {
+                        nums[i] = nums[i + 1];
+                    }
+                    else
+                    {
+                        nums[i + 1] = nums[i];
+                    }
+                    count++;
+                }
+            }
+
+            if (count <= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 674. Longest Continuous Increasing Subsequence
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int FindLengthOfLCIS(int[] nums)
+        {
+            if (nums.Length < 2)
+            {
+                return nums.Length;
+            }
+
+            int count = 1;
+            int max = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] > nums[i - 1])
+                {
+                    count++;
+                }
+                else
+                {
+                    if (count > max)
+                    {
+                        max = count;
+                    }
+                    count = 1;
+                }
+            }
+            if (count > max)
+            {
+                max = count;
+            }
+            return max;
+        }
+
+        /// <summary>
+        /// 747. Largest Number At Least Twice of Others
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int DominantIndex(int[] nums)
+        {
+            if (nums.Length < 2)
+            {
+                return 0;
+            }
+            int maxF = 0;
+            int maxS = 0;
+            int index = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > maxF)
+                {
+                    maxS = maxF;
+                    maxF = nums[i];
+                    index = i;
+                }
+                else if (nums[i] > maxS)
+                {
+                    maxS = nums[i];
+                }
+            }
+            if (maxF < maxS * 2)
+            {
+                return -1;
+            }
+
+            return index;
+        }
+
+        /// <summary>
         /// 819. Most Common Word
         /// "Bob hit a ball, the hit BALL flew far after it was hit.";
         /// </summary>
@@ -480,9 +883,9 @@ namespace leetcode
             StringBuilder result = new StringBuilder();
             char[] input = S.ToCharArray();
 
-            int index = S.Length-1;
+            int index = S.Length - 1;
 
-            for(int i = 0; i < input.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
                 if (Char.IsLetter(input[i]))
                 {
@@ -499,7 +902,7 @@ namespace leetcode
                             index--;
                         }
                     }
-                    
+
                 }
                 else
                 {
@@ -520,7 +923,7 @@ namespace leetcode
             int startIndex = 0;
             int endIndex = S.Length - 1;
 
-            while (startIndex < S.Length && endIndex >=0)
+            while (startIndex < S.Length && endIndex >= 0)
             {
                 if (!Char.IsLetter(Convert.ToChar(S[endIndex])))
                 {
@@ -574,6 +977,101 @@ namespace leetcode
                 }
             }
             return A;
+        }
+
+        /// <summary>
+        /// 985. Sum of Even Numbers After Queries
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="queries"></param>
+        /// <returns></returns>
+        public int[] SumEvenAfterQueries(int[] A, int[][] queries)
+        {
+            int resultLengh = queries.Length;
+            int[] result = new int[resultLengh];
+
+            for (int i = 0; i < queries.Length; i++)
+            {
+                int value = queries[i][0];
+                int index = queries[i][1];
+                A[index] += value;
+                int sum = 0;
+                for (int j = 0; j < A.Length; j++)
+                {
+                    if (A[j] % 2 == 0)
+                    {
+                        sum += A[j];
+                    }
+                }
+                result[i] = sum;
+            }
+
+            return result;
+        }
+
+        public int[] SumEvenAfterQueriesOpt(int[] A, int[][] queries)
+        {
+            int S = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] % 2 == 0)
+                    S += A[i];
+            }
+
+            int[] ans = new int[queries.Length];
+
+            for (int i = 0; i < queries.Length; ++i)
+            {
+                int val = queries[i][0], index = queries[i][1];
+                if (A[index] % 2 == 0)
+                { S -= A[index]; }
+                A[index] += val;
+                if (A[index] % 2 == 0)
+                { S += A[index]; }
+                ans[i] = S;
+            }
+
+            return ans;
+        }
+
+        /// <summary>
+        /// 1013. Partition Array Into Three Parts With Equal Sum
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public bool CanThreePartsEqualSum(int[] A)
+        {
+            bool result = false;
+            int sum = 0;
+            
+            for (int i = 0; i < A.Length; i++)
+            {
+                sum += A[i];
+            }
+
+            if (sum%3 != 0)
+            {
+                return false;
+            }
+
+            int target = sum / 3;
+            int count = 0;
+            int tempSum = 0;
+
+            for (int j = 0; j < A.Length; j++)
+            {
+                tempSum += A[j];
+                if (tempSum == target)
+                {
+                    tempSum = 0;
+                    count++;
+                    if (count == 2)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return result;
         }
 
     }

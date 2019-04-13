@@ -10,26 +10,70 @@ namespace UnitTestQuestions
     public class UnitTestQuestions
     {
         /// <summary>
+        /// 20. Valid Parentheses
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Stack")]
+        [Priority(2)]
+        public void TestMethod20()
+        {
+            string input1 = "()[]{}";
+            string input2 = "([)]";
+            bool expected = true;
+
+            Question test = new Question();
+            bool actual = test.IsValid(input1);
+            Console.Write(actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 53. Maximum Subarray
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Dynamic Programming")]
+        [Priority(2)]
+        public void TestMethod53()
+        {
+            int[] input1 = {-2, 1, -3, 4, -1, 2, 1, -5, 4 , 7};
+            int[] input = { -2, -1 };
+            int expected = 12;
+
+            Question test = new Question();
+            int actual = test.MaxSubArray(input1);
+
+            Console.Write(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 66. Plus One
         /// </summary>
-        [TestMethod]     
+        [TestMethod]
         [Owner("Steven Ma")]
         [TestCategory("Array")]
         [Priority(2)]
         public void TestMethod66()
         {
             int[] input = { 9, 9 };
+            int[] expected = { 1, 0, 0};
             for (int i = 0; i < input.Length; i++)
             {
                 Console.Write(input[i] + " ");
             }
             Console.WriteLine();
+
             Question myQ = new Question();
-            int[] result = myQ.PlusOne(input);
-            for (int i = 0; i < result.Length; i++)
+            int[] actual = myQ.PlusOne(input);
+            for (int i = 0; i < actual.Length; i++)
             {
-                Console.Write(result[i] + " ");
+                Console.Write(actual[i] + " ");
             }
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -42,9 +86,13 @@ namespace UnitTestQuestions
         public void TestMethod70()
         {
             int input = 10;
+            int expected = 89;
+
             Question test = new Question();
-            int result = test.ClimbStairs(input);
-            Console.Write(result);
+            int actual = test.ClimbStairs(input);
+
+            Console.Write(actual);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -57,10 +105,63 @@ namespace UnitTestQuestions
         public void TestMethod121()
         {
             int[] input = { 7, 1, 5, 3, 6, 4 };
+            int expected = 5;
+
             Question test = new Question();
             //int result = test.MaxProfit(input);
-            int result = test.MaxProfitOpt(input);
-            Console.Write(result);
+            int actual = test.MaxProfitOpt(input);
+
+            Console.Write(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 125. Valid Palindrome
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod125()
+        {
+            string input1 = "A man, a plan, a canal: Panama";
+            string input2 = "race a car";
+            string input3 = "0P";
+            bool expect = false;
+
+            Question test = new Question();
+            bool actual = test.IsPalindromeOpt(input3);
+
+            Console.Write(actual);
+            Assert.AreEqual(expect, actual);
+        }
+
+        /// <summary>
+        /// 238. Product of Array Except Self
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod238()
+        {
+            int[] input = { 1, 2, 3, 4 };
+            int[] expected = { 24, 12, 8, 6 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Console.WriteLine();
+
+            Question test = new Question();
+            //int result = test.MaxProfit(input);
+            int[] actual = test.ProductExceptSelf(input);
+
+            for (int i = 0; i < actual.Length; i++)
+            {
+                Console.Write(actual[i] + " ");
+            }
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -72,20 +173,30 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod268()
         {
-            Question myQ = new Question();
             int[] input1 = { 3, 0, 1 };
+            int[] input2 = { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
+            int expected1 = 2;
+            int expected2 = 8;
+
             for (int i = 0; i < input1.Length; i++)
             {
                 Console.Write(input1[i] + " ");
             }
-            Console.WriteLine("\n" + myQ.MissingNumber(input1) + "\n");
-            int[] input2 = { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
-
+            Console.WriteLine();
             for (int i = 0; i < input2.Length; i++)
             {
                 Console.Write(input2[i] + " ");
             }
-            Console.WriteLine("\n" + myQ.MissingNumber(input2));
+
+            Question myQ = new Question();
+            int actual1 = myQ.MissingNumber(input1);
+            int actual2 = myQ.MissingNumber(input2);
+            Console.WriteLine("\n" + actual1);
+            Console.WriteLine(actual2);
+
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
         }
 
         /// <summary>
@@ -179,6 +290,90 @@ namespace UnitTestQuestions
             {
                 Console.Write(r + " ");
             }
+        }
+
+        /// <summary>
+        /// 509. Fibonacci Number
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Dynamic Programming")]
+        [Priority(2)]
+        public void TestMethod509()
+        {
+            int input1 = 3;
+            int input2 = 5;
+
+            Question myQ = new Question();
+            Console.WriteLine("N = {0}", input1);
+            Console.WriteLine("F number is {0}", myQ.Fib(input1));
+            Console.WriteLine("N = {0}", input2);
+            Console.WriteLine("F number is {0}", myQ.Fib(input2));
+        }
+
+        /// <summary>
+        /// 643. Maximum Average Subarray I
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Dynamic Programming")]
+        [Priority(2)]
+        public void TestMethod643()
+        {
+            int[] input1 = { 1, 12, -5, -6, 50, 3 };
+            int input2 = 4;
+            
+            Question myQ = new Question();
+            double result = myQ.FindMaxAverage(input1, input2);
+            Console.WriteLine(result);
+        }
+
+        /// <summary>
+        /// 665. Non-decreasing Array
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod665()
+        {
+            int[] input = { 4, 5, 3, 7 };
+
+            Question myQ = new Question();
+            bool result = myQ.CheckPossibility(input);
+            Console.WriteLine(result);
+        }
+
+        /// <summary>
+        /// 674. Longest Continuous Increasing Subsequence
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod674()
+        {
+            int[] input = { 1, 3, 5, 8 };
+
+            Question myQ = new Question();
+            int result = myQ.FindLengthOfLCIS(input);
+            Console.WriteLine(result);
+        }
+
+        /// <summary>
+        /// 747. Largest Number At Least Twice of Others
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod747()
+        {
+            int[] input = {0, 0, 3, 2};
+
+            Question myQ = new Question();
+            int result = myQ.DominantIndex(input);
+            Console.WriteLine(result);
         }
 
         /// <summary>
@@ -291,6 +486,59 @@ namespace UnitTestQuestions
             {
                 Console.Write(output[j] + " ");
             }
+        }
+
+        /// <summary>
+        /// 985. Sum of Even Numbers After Queries
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod985()
+        {
+            int[] input1 = { 1, 2, 3, 4 };
+            int[][] input2 = new int[4][];
+            input2[0] = new int[] { 1, 0 };
+            input2[1] = new int[] { -3, 1 };
+            input2[2] = new int[] { -4, 0 };
+            input2[3] = new int[] { 2, 3 };
+
+            int[] input3 = { 3 };
+            int[][] input4 = new int[1][];
+            input4[0] = new int[] { -2, 0};
+
+            for (int i = 0; i < input1.Length; i++)
+            {
+                Console.Write(input1[i] + " ");
+            }
+            Question test = new Question();
+            int[] output = test.SumEvenAfterQueriesOpt(input1,input2);
+            Console.WriteLine();
+            for (int j = 0; j < output.Length; j++)
+            {
+                Console.Write(output[j] + " ");
+            }
+        }
+
+        /// <summary>
+        /// 1013. Partition Array Into Three Parts With Equal Sum
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod1013()
+        {
+            int[] input = { 3, 3, 6, 5, -2, 2, 5, 1, -9, 4 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Console.WriteLine();
+            Question test = new Question();
+            bool output = test.CanThreePartsEqualSum(input);
+            Console.WriteLine(output);
         }
     }
 }
