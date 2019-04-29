@@ -2,12 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace leetcode
 {
     public class Question
     {
+        /// <summary>
+        /// 3. Longest Substring Without Repeating Characters
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int LengthOfLongestSubstring(string s)
+        {
+            if (s.Length < 2)
+            {
+                return s.Length;
+            }
+
+            int max = 0;
+            char current = s[0];
+            int count = 0;
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (current != s[i])
+                {
+                    count++;
+                }
+                else
+                {
+                    if (count > max)
+                    {
+                        max = count;
+                        count = 1;
+                    }
+                }
+            }
+            if (count > max)
+            {
+                max = count;
+            }
+            return max;
+        }
+
         /// <summary>
         /// 20. Valid Parentheses
         /// </summary>
@@ -85,6 +123,45 @@ namespace leetcode
                 default:
                     return false;
             }
+        }
+
+        /// <summary>
+        /// 38. Count and Say
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string CountAndSay(int n)
+        {
+            if (n == 0)
+            {
+                return "";
+            }
+            if (n == 1)
+            {
+                return "1";
+            }
+
+            string s = CountAndSay(n - 1);
+            StringBuilder result = new StringBuilder();
+            char current = s[0];
+            int count = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == current)
+                {
+                    count++;
+                }
+                else
+                {
+                    result.Append(count);
+                    result.Append(current);
+                    current = s[i];
+                    count = 1;
+                }
+            }
+            result.Append(count);
+            result.Append(current);
+            return result.ToString();
         }
 
         /// <summary>
@@ -372,6 +449,25 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 344. Reverse String
+        /// </summary>
+        /// <param name="s"></param>
+        public void ReverseString(char[] s)
+        {
+            int start = 0;
+            int end = s.Length - 1;
+            char temp;
+            while (start < end)
+            {
+                temp = s[start];
+                s[start] = s[end];
+                s[end] = temp;
+                start++;
+                end--;
+            }
+        }
+
+        /// <summary>
         /// 345. Reverse Vowels of a String
         /// </summary>
         /// <param name="s"></param>
@@ -405,6 +501,62 @@ namespace leetcode
                 endIndex--;
             }
             return result.ToString();
+        }
+
+        /// <summary>
+        /// 383. Ransom Note
+        /// </summary>
+        /// <param name="ransomNote"></param>
+        /// <param name="magazine"></param>
+        /// <returns></returns>
+        public bool CanConstruct(string ransomNote, string magazine)
+        {
+            if (ransomNote.Length > magazine.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < ransomNote.Length; i++)
+            {
+                if (!magazine.Contains(ransomNote[i]))
+                {
+                    return false;
+                }
+                else
+                {
+                    int index = magazine.IndexOf(ransomNote[i]);
+                    magazine = magazine.Remove(index, 1);
+                }
+            }
+
+            return true;
+        }
+
+        public bool CanConstructOpt(string ransomNote, string magazine)
+        {
+            if (ransomNote.Length > magazine.Length)
+            {
+                return false;
+            }
+
+            int[] temp = new int[26];
+            int index = 0;
+            for (int i = 0; i< magazine.Length; i++)
+            {
+                index = magazine[i] - 'a';
+                temp[index]++;
+            }
+            for (int j = 0; j < ransomNote.Length; j++)
+            {
+                index = ransomNote[j] - 'a';
+                temp[index]--;
+                if (temp[index] < 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -474,51 +626,98 @@ namespace leetcode
             {
                 return chars.Length;
             }
-            List<char> result = new List<char>();
-            int start = 0;
-            int end = 0;
+            StringBuilder result = new StringBuilder();
+            char current = chars[0];
+            int currentCount = 1;
             for (int i = 1; i < chars.Length; i++)
             {
-                if (chars[i] == chars[start])
+                if (chars[i] == current)
                 {
-                    end = i;
-                    if (i == chars.Length - 1)
+                    currentCount++;
+                    if (i == chars.Length-1)
                     {
-                        if (end == start)
+                        result.Append(chars[i]);
+                        if (currentCount > 1)
                         {
-                            result.Add(chars[start]);
-                        }
-                        if (end > start)
-                        {
-                            result.Add(chars[start]);
-                            string temp = (end - start + 1).ToString();
-                            for (int j = 0; j < temp.Length; j++)
-                            {
-                                result.Add(temp[j]);
-                            }
+                            result.Append(currentCount.ToString());
                         }
                     }
                 }
                 else
                 {
-                    if (end == start)
+                    result.Append(current);
+                    if (currentCount > 1)
                     {
-                        result.Add(chars[start]);
+                        result.Append(currentCount.ToString());
                     }
-                    if (end > start)
-                    {
-                        result.Add(chars[start]);
-                        string temp = (end - start + 1).ToString();
-                        for (int j = 0; j < temp.Length; j++)
-                        {
-                            result.Add(temp[j]);
-                        }
-                    }
-                    start = i;
-                    end = start;
+                    current = chars[i];
+                    currentCount = 1;
                 }
             }
-            return result.Count;
+            return result.Length;
+        }
+
+        public int CompressOpt(char[] chars)
+        {
+            if (chars.Length <= 1)
+            {
+                return chars.Length;
+            }
+ 
+            char current = chars[0];
+            int currentCount = 0;
+            int end = 0;
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (chars[i] == current)
+                {
+                    currentCount++;
+                    if (i == chars.Length - 1)
+                    {
+                        chars[end] = current;
+                        if (currentCount > 1)
+                        {
+                            string temp = currentCount.ToString();
+                            for (int j = 0; j < temp.Length; j++)
+                            {
+                                chars[end + 1 + j] = temp[j];
+                            }
+                            end = end + 1 + temp.Length;
+                        }
+                        else
+                        {
+                            end += 1;
+                        }
+                    }
+                }
+                else
+                {
+                    chars[end] = current;
+                    if (currentCount > 1)
+                    {
+                        string temp = currentCount.ToString();
+                        for (int j = 0; j < temp.Length; j++)
+                        {
+                            chars[end + 1 + j] = temp[j];
+                        }
+                        end = end + 1 + temp.Length;
+                    }
+                    else
+                    {
+                        end += 1;
+                    }
+                    current = chars[i];
+                    currentCount = 1;
+                    if (i == chars.Length - 1)
+                    {
+                        chars[end] = current;
+                        end += 1;
+                    }
+                }
+            }
+
+            return end;
         }
 
         /// <summary>
@@ -554,6 +753,37 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 485. Max Consecutive Ones
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int FindMaxConsecutiveOnes(int[] nums)
+        {
+            int temp = 0;
+            int max = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    temp += nums[i];
+                }
+                else
+                {
+                    if (temp > max)
+                    {
+                        max = temp;                      
+                    }
+                    temp = 0;
+                }
+            }
+            if (temp > max)
+            {
+                max = temp;
+            }
+            return max;
+        }
+
+        /// <summary>
         /// 509. Fibonacci Number
         /// </summary>
         /// <param name="N"></param>
@@ -581,6 +811,130 @@ namespace leetcode
             }
 
             return f2;
+        }
+
+        /// <summary>
+        /// 520. Detect Capital
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public bool DetectCapitalUse(string word)
+        {
+            if (word.Length < 2)
+            {
+                return true;
+            }
+
+            if (Char.IsUpper(word[0]))
+            {
+                if (Char.IsUpper(word[1]))
+                {
+                    for (int i = 2; i < word.Length; i++)
+                    {
+                        if (Char.IsLower(word[i]))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 2; i < word.Length; i++)
+                    {
+                        if (Char.IsUpper(word[i]))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 1; i<word.Length; i++)
+                {
+                    if (Char.IsUpper(word[i]))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 551. Student Attendance Record I
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public bool CheckRecord(string s)
+        {
+            int countA = 0;
+            int countL = 0;
+            bool coutinueL = false;
+
+            for (int i = 0; i < s.Length; i++)
+            {               
+                if (s[i] == 'A')
+                {
+                    if (countA > 1)
+                    {
+                        return false;
+                    }
+                    countA++;
+                }
+
+                if (s[i] == 'L')
+                {
+                    if (countL > 2)
+                    {
+                        return false;
+                    }
+                    countL++;
+                    coutinueL = true;
+                }
+                if (s[i] != 'L' && countL <=2)
+                {
+                    countL = 0;
+                    coutinueL = false;
+                }
+            }
+            if (countA > 1 || countL > 2)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool CheckRecordOpt(string s)
+        {
+            if (s.Contains("LLL"))
+            {
+                return false;
+            }
+
+            int numA = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == 'A')
+                {
+                    numA++;
+                }
+                if (numA > 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool CheckRecordOptRex(string s)
+        {
+            if (Regex.IsMatch(s, ".*A.*A.*") || Regex.IsMatch(s, ".*LLL.*"))
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -693,6 +1047,48 @@ namespace leetcode
                 max = count;
             }
             return max;
+        }
+
+        /// <summary>
+        /// 680. Valid Palindrome II
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool ValidPalindrome(string s)
+        {
+            if (s.Length < 2)
+            {
+                return true;
+            }
+                   
+            int start = 0;
+            int end = s.Length - 1;
+
+            while (start < end)
+            {
+                if (s[start] != s[end])
+                {
+                    return IsValidPalindrome(s, start, end - 1) || IsValidPalindrome(s, start+1, end);
+                }
+                start++;
+                end--;
+            }
+
+            return true;
+        }
+
+        public static bool IsValidPalindrome(string s, int left, int right)
+        {
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                {
+                    return false;
+                }
+                left++;
+                right--;
+            }
+            return true;
         }
 
         /// <summary>
@@ -940,6 +1336,48 @@ namespace leetcode
                 endIndex--;
             }
             return result.ToString();
+        }
+
+        /// <summary>
+        /// 929. Unique Email Addresses
+        /// </summary>
+        /// <param name="emails"></param>
+        /// <returns></returns>
+        public int NumUniqueEmails(string[] emails)
+        {
+            if (emails.Length < 2)
+            {
+                return emails.Length;
+            }
+
+            List<string> result = new List<string>();
+            foreach (string email in emails)
+            {
+                string temp = ValidEmail(email);
+                if (!result.Contains(temp))
+                {
+                    result.Add(temp);
+                }
+            }
+
+            return result.Count;
+        }
+
+        public static string ValidEmail(string email)
+        {
+            int index = email.IndexOf('@');
+            string local = email.Substring(0, index);
+            string domain = email.Substring(index, email.Length - index);
+            if (local.Contains("."))
+            {
+                local = local.Replace(".", "");
+            }
+            if (local.Contains("+"))
+            {
+                int indexPlus = local.IndexOf('+');
+                local = local.Substring(0, indexPlus);
+            }
+            return local + domain;
         }
 
         /// <summary>

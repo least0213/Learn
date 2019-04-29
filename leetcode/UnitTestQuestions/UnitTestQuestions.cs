@@ -10,6 +10,26 @@ namespace UnitTestQuestions
     public class UnitTestQuestions
     {
         /// <summary>
+        /// 3. Longest Substring Without Repeating Characters
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod3()
+        {
+            string input1 = "abcabcbb";
+            string input2 = "pwwkew";
+            int expected = 3;
+
+            Question test = new Question();
+            int actual = test.LengthOfLongestSubstring(input1);
+            Console.Write(actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 20. Valid Parentheses
         /// </summary>
         [TestMethod]
@@ -24,6 +44,25 @@ namespace UnitTestQuestions
 
             Question test = new Question();
             bool actual = test.IsValid(input1);
+            Console.Write(actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 38. Count and Say
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod38()
+        {
+            int input = 5;
+            string expected = "111221";
+
+            Question test = new Question();
+            string actual = test.CountAndSay(input);
             Console.Write(actual);
 
             Assert.AreEqual(expected, actual);
@@ -209,10 +248,33 @@ namespace UnitTestQuestions
         public void TestMethod303()
         {
             int[] input = { -2, 0, 3, -5, 2, -1 };
+            int expected = 1;
+
             NumArray test = new NumArray(input);
             //int[] sumList = test.NumArray(input);
-            int result = test.SumRange(0, 2);
-            Console.WriteLine(result);
+            int actual = test.SumRange(0, 2);
+
+            Console.WriteLine(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 344. Reverse String
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod344()
+        {
+            char[] input = { 'h', 'e', 'l', 'l', 'o' };
+            char[] expected = { 'o', 'l', 'l', 'e', 'h' };
+
+            Question myQ = new Question();
+            myQ.ReverseString(input);
+            char[] actual = input;
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -226,9 +288,36 @@ namespace UnitTestQuestions
         {
             string input = "leetcode";
             Console.WriteLine("input string is : {0}", input);
+
+            string expected = "leotcede";
             Console.WriteLine("expect output string is : leotcede");
+
             Question myQ = new Question();
-            Console.WriteLine("actual output string is : {0}", myQ.ReverseVowels(input));
+            string actual = myQ.ReverseVowels(input);
+            Console.WriteLine("actual output string is : {0}", actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 383. Ransom Note
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod383()
+        {
+            string input1 = "leeee";
+            string input2 = "leetcode";
+            Console.WriteLine("input1 string is : {0} \ninput2 string is : {1}", input1, input2);
+            bool expected = false;
+
+            Question myQ = new Question();
+            bool actual = myQ.CanConstructOpt(input1, input2);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -240,13 +329,21 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod387()
         {
-            Question myQ = new Question();
             string s1 = "leetcode";
             Console.WriteLine(s1);
-            Console.WriteLine(myQ.FirstUniqChar(s1));
             string s2 = "loveleetcode";
             Console.WriteLine(s2);
-            Console.WriteLine(myQ.FirstUniqChar(s2));
+            int expected1 = 0;
+            int expected2 = 2;
+
+            Question myQ = new Question();                        
+            int actual1 = myQ.FirstUniqChar(s1);
+            Console.WriteLine(actual1);
+            int actual2 = myQ.FirstUniqChar(s2);
+            Console.WriteLine(actual2);
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
         }
 
         /// <summary>
@@ -258,15 +355,21 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod443()
         {
-            Question myQ = new Question();
-            char[] input1 = new char[] { 'a', 'a', 'b', 'b', 'c', 'c', 'c' };
-            char[] input2 = new char[] { 'a' };
-            char[] input = new char[] { 'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b' };
+
+            char[] input1 = new char[] { 'a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'c' };
+            char[] input = new char[] { 'a', 'b', 'c' };
+            char[] input3 = new char[] { 'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b' };
             for (int i = 0; i < input.Length; i++)
             {
                 Console.Write(input[i] + " ");
             }
-            Console.WriteLine("\n" + myQ.Compress(input));
+            int expected = 3;
+
+            Question myQ = new Question();
+            int actual = myQ.CompressOpt(input);
+            Console.WriteLine("\n" + actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -293,6 +396,30 @@ namespace UnitTestQuestions
         }
 
         /// <summary>
+        /// 485. Max Consecutive Ones
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod485()
+        {
+            int[] input = { 1, 1, 0, 1, 1, 1 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.Write(input[i] + " ");
+            }
+            Console.WriteLine("\n");
+            int expected = 3;
+
+            Question myQ = new Question();
+            int actual = myQ.FindMaxConsecutiveOnes(input);
+
+            Console.WriteLine(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 509. Fibonacci Number
         /// </summary>
         [TestMethod]
@@ -302,13 +429,72 @@ namespace UnitTestQuestions
         public void TestMethod509()
         {
             int input1 = 3;
+            Console.WriteLine("N = {0}", input1);
             int input2 = 5;
+            Console.WriteLine("N = {0}", input2);
+            int expected1 = 2;
+            int expected2 = 5;
 
             Question myQ = new Question();
-            Console.WriteLine("N = {0}", input1);
-            Console.WriteLine("F number is {0}", myQ.Fib(input1));
-            Console.WriteLine("N = {0}", input2);
-            Console.WriteLine("F number is {0}", myQ.Fib(input2));
+            int actual1 = myQ.Fib(input1);
+            Console.WriteLine("F number is {0}", actual1);
+            int actual2 = myQ.Fib(input2);
+            Console.WriteLine("F number is {0}", actual2);
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+        }
+
+        /// <summary>
+        /// 520. Detect Capital
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod520()
+        {
+            string input1 = "USA";
+            Console.WriteLine(input1);
+            string input2 = "FlaG";
+            Console.WriteLine(input2);
+            bool expected1 = true;
+            bool expected2 = false;
+
+            Question myQ = new Question();
+            bool actual1 = myQ.DetectCapitalUse(input1);
+            Console.WriteLine(actual1);
+            bool actual2 = myQ.DetectCapitalUse(input2);
+            Console.WriteLine(actual2);
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+        }
+
+        /// <summary>
+        /// 551. Student Attendance Record I
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod551()
+        {
+            string input1 = "APPALLP";
+            Console.WriteLine(input1);
+            string input2 = "PPALLL";
+            Console.WriteLine(input2);
+            bool expected1 = false;
+            bool expected2 = false;
+
+            Question myQ = new Question();
+            bool actual1 = myQ.CheckRecordOptRex(input1);
+            Console.WriteLine(actual1);
+            bool actual2 = myQ.CheckRecordOptRex(input2);
+            Console.WriteLine(actual2);
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
         }
 
         /// <summary>
@@ -322,10 +508,13 @@ namespace UnitTestQuestions
         {
             int[] input1 = { 1, 12, -5, -6, 50, 3 };
             int input2 = 4;
+            double expected = 12.75;
             
             Question myQ = new Question();
-            double result = myQ.FindMaxAverage(input1, input2);
-            Console.WriteLine(result);
+            double actual = myQ.FindMaxAverage(input1, input2);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -338,10 +527,13 @@ namespace UnitTestQuestions
         public void TestMethod665()
         {
             int[] input = { 4, 5, 3, 7 };
+            bool expected = true;
 
             Question myQ = new Question();
-            bool result = myQ.CheckPossibility(input);
-            Console.WriteLine(result);
+            bool actual = myQ.CheckPossibility(input);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -354,10 +546,35 @@ namespace UnitTestQuestions
         public void TestMethod674()
         {
             int[] input = { 1, 3, 5, 8 };
+            int expected = 4;
 
             Question myQ = new Question();
-            int result = myQ.FindLengthOfLCIS(input);
-            Console.WriteLine(result);
+            int actual = myQ.FindLengthOfLCIS(input);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 680. Valid Palindrome II
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod680()
+        {
+            string input1 = "ebcbbececabbacecbbcbe";
+            string input2 = "abcdedca";
+            string input3 = "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga";
+            //string input3 = "aguokepatgbnvfqmgmlucupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuclmgmqfvnbgtapekouga";
+            bool expected = true;
+
+            Question myQ = new Question();
+            bool actual = myQ.ValidPalindrome(input3);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -370,10 +587,13 @@ namespace UnitTestQuestions
         public void TestMethod747()
         {
             int[] input = {0, 0, 3, 2};
+            int expected = -1;
 
             Question myQ = new Question();
-            int result = myQ.DominantIndex(input);
-            Console.WriteLine(result);
+            int actual = myQ.DominantIndex(input);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -385,12 +605,17 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod819()
         {
-            Question myQ = new Question();
             //string paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.";
             string paragraph = "Bob";
             Console.WriteLine(paragraph);
             string[] banned = { "hit" };
-            Console.WriteLine(myQ.MostCommonWord(paragraph, banned));
+            string expected = "bob";
+
+            Question myQ = new Question();
+            string actual = myQ.MostCommonWord(paragraph, banned);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -440,13 +665,17 @@ namespace UnitTestQuestions
             {
                 Console.Write(input[i] + " ");
             }
+            int[] expected = { 8, 4, 2, 1, 7, 3 };
+
             Question test = new Question();
-            int[] output = test.SortArrayByParity(input);
+            int[] actual = test.SortArrayByParity(input);
             Console.WriteLine();
             for (int j = 0; j < input.Length; j++)
             {
-                Console.Write(output[j] + " ");
+                Console.Write(actual[j] + " ");
             }
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -460,9 +689,33 @@ namespace UnitTestQuestions
         {
             string input = "Test1ng-Leet=code-Q!";
             Console.WriteLine(input);
+            string expected = "Qedo1ct-eeLg=ntse-T!";
+
             Question myQ = new Question();
+            string actual = myQ.ReverseOnlyLettersOpt(input);
             Console.WriteLine(myQ.ReverseOnlyLetters(input));
             Console.WriteLine(myQ.ReverseOnlyLettersOpt(input));
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 929. Unique Email Addresses
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod929()
+        {
+            string[] input = {"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" };
+            int expected = 2;
+
+            Question myQ = new Question();
+            int actual = myQ.NumUniqueEmails(input);
+            Console.WriteLine(myQ.NumUniqueEmails(input));
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -479,13 +732,17 @@ namespace UnitTestQuestions
             {
                 Console.Write(input[i] + " ");
             }
+            int[] expected = { 0, 1, 9, 16, 100 };
+
             Question test = new Question();
-            int[] output = test.SortedSquares(input);
+            int[] actual = test.SortedSquares(input);
             Console.WriteLine();
             for (int j = 0; j < input.Length; j++)
             {
-                Console.Write(output[j] + " ");
+                Console.Write(actual[j] + " ");
             }
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -512,13 +769,18 @@ namespace UnitTestQuestions
             {
                 Console.Write(input1[i] + " ");
             }
+            int[] expected = { 8, 6, 2, 4 };
+
+
             Question test = new Question();
-            int[] output = test.SumEvenAfterQueriesOpt(input1,input2);
+            int[] actual = test.SumEvenAfterQueriesOpt(input1,input2);
             Console.WriteLine();
-            for (int j = 0; j < output.Length; j++)
+            for (int j = 0; j < actual.Length; j++)
             {
-                Console.Write(output[j] + " ");
+                Console.Write(actual[j] + " ");
             }
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         /// <summary>
@@ -535,10 +797,14 @@ namespace UnitTestQuestions
             {
                 Console.Write(input[i] + " ");
             }
+            bool expected = true;
             Console.WriteLine();
+
             Question test = new Question();
-            bool output = test.CanThreePartsEqualSum(input);
-            Console.WriteLine(output);
+            bool actual = test.CanThreePartsEqualSum(input);
+            Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
