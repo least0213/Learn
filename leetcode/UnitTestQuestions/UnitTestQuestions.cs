@@ -77,7 +77,7 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod53()
         {
-            int[] input1 = {-2, 1, -3, 4, -1, 2, 1, -5, 4 , 7};
+            int[] input1 = { -2, 1, -3, 4, -1, 2, 1, -5, 4, 7 };
             int[] input = { -2, -1 };
             int expected = 12;
 
@@ -98,7 +98,7 @@ namespace UnitTestQuestions
         public void TestMethod66()
         {
             int[] input = { 9, 9 };
-            int[] expected = { 1, 0, 0};
+            int[] expected = { 1, 0, 0 };
             for (int i = 0; i < input.Length; i++)
             {
                 Console.Write(input[i] + " ");
@@ -336,7 +336,7 @@ namespace UnitTestQuestions
             int expected1 = 0;
             int expected2 = 2;
 
-            Question myQ = new Question();                        
+            Question myQ = new Question();
             int actual1 = myQ.FirstUniqChar(s1);
             Console.WriteLine(actual1);
             int actual2 = myQ.FirstUniqChar(s2);
@@ -509,7 +509,7 @@ namespace UnitTestQuestions
             int[] input1 = { 1, 12, -5, -6, 50, 3 };
             int input2 = 4;
             double expected = 12.75;
-            
+
             Question myQ = new Question();
             double actual = myQ.FindMaxAverage(input1, input2);
             Console.WriteLine(actual);
@@ -586,7 +586,7 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod747()
         {
-            int[] input = {0, 0, 3, 2};
+            int[] input = { 0, 0, 3, 2 };
             int expected = -1;
 
             Question myQ = new Question();
@@ -708,7 +708,7 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod929()
         {
-            string[] input = {"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" };
+            string[] input = { "test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" };
             int expected = 2;
 
             Question myQ = new Question();
@@ -763,7 +763,7 @@ namespace UnitTestQuestions
 
             int[] input3 = { 3 };
             int[][] input4 = new int[1][];
-            input4[0] = new int[] { -2, 0};
+            input4[0] = new int[] { -2, 0 };
 
             for (int i = 0; i < input1.Length; i++)
             {
@@ -773,7 +773,7 @@ namespace UnitTestQuestions
 
 
             Question test = new Question();
-            int[] actual = test.SumEvenAfterQueriesOpt(input1,input2);
+            int[] actual = test.SumEvenAfterQueriesOpt(input1, input2);
             Console.WriteLine();
             for (int j = 0; j < actual.Length; j++)
             {
@@ -803,6 +803,45 @@ namespace UnitTestQuestions
             Question test = new Question();
             bool actual = test.CanThreePartsEqualSum(input);
             Console.WriteLine(actual);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 1662. Check If Two String Arrays are Equivalent
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod1662()
+        {
+            string[] word1 = { "a", "bc" };
+            string[] word2 = { "ab", "c" };
+            Question test = new Question();
+            bool expected = true;
+            bool actual = test.ArrayStringsAreEqual2(word1, word2);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 1678. Goal Parser Interpretation
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod1678()
+        {
+            string input = "(al)G(al)()()G";
+            Console.WriteLine("input string: {0}", input);
+
+            Question test = new Question();
+            string actual = test.Interpret(input);
+            string expected = "alGalooG";
+            Console.WriteLine("output string: {0}", actual);
+            Console.WriteLine("expected string: {0}", expected);
 
             Assert.AreEqual(expected, actual);
         }

@@ -1512,6 +1512,62 @@ namespace leetcode
             return result;
         }
 
+        /// <summary>
+        /// 1662. Check If Two String Arrays are Equivalent
+        /// </summary>
+        /// <param name="word1"></param>
+        /// <param name="word2"></param>
+        /// <returns></returns>
+        public bool ArrayStringsAreEqual(string[] word1, string[] word2)
+        {
+            bool result = false;
+            string string1 = null;
+            string string2 = null;
+            for (int i = 0; i < word1.Length; i++)
+            {
+                string1 += word1[i];
+            }
+            for (int j = 0; j < word2.Length; j++)
+            {
+                string2 += word2[j];
+            }
+            if (string1 == string2)
+            {
+                result = true;
+                return result;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 1662. Check If Two String Arrays are Equivalent
+        /// </summary>
+        /// <param name="word1"></param>
+        /// <param name="word2"></param>
+        /// <returns></returns>
+        public bool ArrayStringsAreEqual2(string[] word1, string[] word2)
+        {
+            return String.Join("", word1).Equals(String.Join("", word2));
+        }
+
+        /// <summary>
+        /// 1678. Goal Parser Interpretation
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        public string Interpret(string command)
+        {
+            if (command.Contains("()"))
+            {
+                command = command.Replace("()", "o");
+            }
+            if (command.Contains("(al)"))
+            {
+                command = command.Replace("(al)", "al");
+            }
+            return command;
+        }
+
     }
 
     /// <summary>

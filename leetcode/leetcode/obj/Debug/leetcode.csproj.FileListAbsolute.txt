@@ -1,0 +1,7 @@
+E:\Learn\20210104\leetcode\leetcode\bin\Debug\leetcode.exe.config
+E:\Learn\20210104\leetcode\leetcode\bin\Debug\leetcode.exe
+E:\Learn\20210104\leetcode\leetcode\bin\Debug\leetcode.pdb
+E:\Learn\20210104\leetcode\leetcode\obj\Debug\leetcode.csproj.CoreCompileInputs.cache
+E:\Learn\20210104\leetcode\leetcode\obj\Debug\leetcode.exe
+E:\Learn\20210104\leetcode\leetcode\obj\Debug\leetcode.pdb
+E:\Learn\20210104\leetcode\leetcode\obj\Debug\leetcode.csprojAssemblyReference.cache
