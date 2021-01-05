@@ -816,7 +816,7 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod1662()
         {
-            string[] word1 = { "a", "bc" };
+            string[] word1 = { "a", "cd" };
             string[] word2 = { "ab", "c" };
             Question test = new Question();
             bool expected = true;
