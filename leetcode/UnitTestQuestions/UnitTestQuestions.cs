@@ -808,6 +808,24 @@ namespace UnitTestQuestions
         }
 
         /// <summary>
+        /// 1446. Consecutive Characters
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod1446()
+        {
+            string input = "abbcccddddeeeeedcba";
+
+            int expected = 5;
+            Question test = new Question();
+            int actual = test.MaxPower(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         [TestMethod]

@@ -1513,6 +1513,38 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 1446. Consecutive Characters
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int MaxPower(string s)
+        {
+            if (s.Length < 2)
+            {
+                return 1;
+            }
+
+            int maxPower = 1;
+            int power = 1;
+            
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (s[i] == s[i - 1])
+                {
+                    power++;
+                }
+                else
+                {
+                    maxPower = Math.Max(maxPower, power);
+                    power = 1;
+                }
+            }
+            maxPower = Math.Max(maxPower, power);
+
+            return maxPower;
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         /// <param name="word1"></param>
