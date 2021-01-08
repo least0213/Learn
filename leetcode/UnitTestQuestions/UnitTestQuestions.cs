@@ -808,6 +808,24 @@ namespace UnitTestQuestions
         }
 
         /// <summary>
+        /// 1374. Generate a String With Characters That Have Odd Counts
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod1374()
+        {
+            int input = 5;
+
+            Question test = new Question();
+            string actual = test.GenerateTheString2(input);
+            string expected = "aaaaa";
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 1446. Consecutive Characters
         /// </summary>
         [TestMethod]
@@ -834,7 +852,7 @@ namespace UnitTestQuestions
         [Priority(2)]
         public void TestMethod1662()
         {
-            string[] word1 = { "a", "cd" };
+            string[] word1 = { "a", "bc" };
             string[] word2 = { "ab", "c" };
             Question test = new Question();
             bool expected = true;

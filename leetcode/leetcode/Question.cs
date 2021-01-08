@@ -1513,6 +1513,39 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 1374. Generate a String With Characters That Have Odd Counts
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string GenerateTheString(int n)
+        {
+            Random rnd = new Random();
+            char radmonChar = (char)rnd.Next('a', 'z');
+
+            if (n % 2 != 0)
+            {
+                return new string(radmonChar, n);
+            }
+
+            return new string(radmonChar, n - 1) + ((char)(radmonChar + 1)).ToString();
+        }
+
+        /// <summary>
+        /// 1374. Generate a String With Characters That Have Odd Counts
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string GenerateTheString2(int n)
+        {
+            if (n % 2 != 0)
+            {
+                return new string('a', n);
+            }
+
+            return new string('a', n - 1) + "b";
+        }
+
+        /// <summary>
         /// 1446. Consecutive Characters
         /// </summary>
         /// <param name="s"></param>
