@@ -1578,6 +1578,27 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+        /// </summary>
+        /// <param name="sentence"></param>
+        /// <param name="searchWord"></param>
+        /// <returns></returns>
+        public int IsPrefixOfWord(string sentence, string searchWord)
+        {
+            string[] words = sentence.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].StartsWith(searchWord))
+                //if (words[i].IndexOf(searchWord) == 0)
+                {
+                    return i + 1;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         /// <param name="word1"></param>

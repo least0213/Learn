@@ -844,6 +844,24 @@ namespace UnitTestQuestions
         }
 
         /// <summary>
+        /// 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("String")]
+        [Priority(2)]
+        public void TestMethod1455()
+        {
+            string sentence = "this problem is an easy problem";
+            string searchWord = "pro";
+            Question test = new Question();
+            int actual = test.IsPrefixOfWord(sentence, searchWord);
+            int expected = 2;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         [TestMethod]
