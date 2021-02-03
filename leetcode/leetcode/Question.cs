@@ -1599,6 +1599,26 @@ namespace leetcode
         }
 
         /// <summary>
+        /// 1480. Running Sum of 1d Array
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int[] RunningSum(int[] nums)
+        {
+            if (nums.Length == 1)
+            {
+                return nums;
+            }
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                nums[i] += nums[i-1];
+            }
+
+            return nums;
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         /// <param name="word1"></param>

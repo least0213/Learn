@@ -862,6 +862,35 @@ namespace UnitTestQuestions
         }
 
         /// <summary>
+        /// 1480. Running Sum of 1d Array
+        /// </summary>
+        [TestMethod]
+        [Owner("Steven Ma")]
+        [TestCategory("Array")]
+        [Priority(2)]
+        public void TestMethod1480()
+        {
+            int[] input = { 1, 2, 3, 4 };
+            int[] expectedResult = { 1, 3, 6, 10 };
+
+            Question test = new Question();
+            int[] actualResult = test.RunningSum(input);
+
+            bool expected = true;
+            bool actual = true;
+            if (Enumerable.SequenceEqual(expectedResult,actualResult))
+            {
+                actual = true;
+            }
+            else
+            {
+                actual = false;
+            }
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// 1662. Check If Two String Arrays are Equivalent
         /// </summary>
         [TestMethod]
